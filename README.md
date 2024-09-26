@@ -14,7 +14,9 @@
 2. .\venv\Scripts\activate
 3. pip install -r requirements.txt
 
-Ao ter o repositório já instalado na sua maquina, a partir da segunda vez ao abrir o projeto, rodar no terminar apenas uma vez a seguinte instrução: .\venv\Scripts\activate
+# Ao ter o repositório já instalado na sua maquina, a partir da segunda vez ao abrir o projeto, rodar no terminar apenas uma vez a seguinte instrução: 
+
+1. .\venv\Scripts\activate
 
 # Subir alteração no git: 
 
