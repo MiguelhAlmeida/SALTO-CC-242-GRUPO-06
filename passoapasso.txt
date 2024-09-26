@@ -1,0 +1,7 @@
+Ao clonar o repositório pela primeira vez, seguir as instruções:
+
+1- python -m venv venv
+2- .\venv\Scripts\activate
+3- pip install -r requirements.txt
+
+Após clonar o repositório a partir da segunda vez ao abrir o projeto, rodar no terminar apenas uma vez a seguinte instrução: .\venv\Scripts\activate
