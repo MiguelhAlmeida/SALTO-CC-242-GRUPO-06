@@ -4,6 +4,8 @@ import random
 
 class SudokuApp:
     def __init__(self, root):
+
+        print('Hello World')
         self.root = root
         self.root.title("Sudoku")
         self.grid = [[0 for _ in range(9)] for _ in range(9)]
