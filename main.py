@@ -55,7 +55,7 @@ entries = [[None for _ in range(2)] for _ in range(2)]
 
 for i in range(2):
     for j in range(2):
-        entry = tk.Entry(root, width=5, justify='center')  # Tamanho ajustado
+        entry = tk.Entry(root, width=5, justify='center') 
         entry.grid(row=i+1, column=j, padx=10, pady=10)
         entry.insert(0, '0')
         entry.bind("<FocusOut>", lambda event, row=i, col=j: valida_entrada(event, row, col))  # Validar após perder o foco
