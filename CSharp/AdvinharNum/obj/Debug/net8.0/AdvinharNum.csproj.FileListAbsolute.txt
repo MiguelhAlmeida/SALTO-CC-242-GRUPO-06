@@ -1,0 +1,14 @@
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\bin\Debug\net8.0\AdvinharNum.exe
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\bin\Debug\net8.0\AdvinharNum.deps.json
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\bin\Debug\net8.0\AdvinharNum.runtimeconfig.json
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\bin\Debug\net8.0\AdvinharNum.dll
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\bin\Debug\net8.0\AdvinharNum.pdb
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\obj\Debug\net8.0\AdvinharNum.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\obj\Debug\net8.0\AdvinharNum.AssemblyInfoInputs.cache
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\obj\Debug\net8.0\AdvinharNum.AssemblyInfo.cs
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\obj\Debug\net8.0\AdvinharNum.csproj.CoreCompileInputs.cache
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\obj\Debug\net8.0\AdvinharNum.dll
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\obj\Debug\net8.0\refint\AdvinharNum.dll
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\obj\Debug\net8.0\AdvinharNum.pdb
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\obj\Debug\net8.0\AdvinharNum.genruntimeconfig.cache
+c:\Users\Gustavo Maragna\Documents\CSharp\AdvinharNum\obj\Debug\net8.0\ref\AdvinharNum.dll
