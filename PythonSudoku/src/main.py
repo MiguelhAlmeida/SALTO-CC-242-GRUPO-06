@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+import random
 
 def reset_matrix(entries):
     for i in range(2):
@@ -26,11 +27,22 @@ def validate_input(entries, row, col):
     except ValueError:
         show_error("Erro ao validar número")
 
+def populate_random_cells(entries, num_cells=2):
+    filled = 0
+    while filled < num_cells:
+        row = random.randint(0, 1)
+        col = random.randint(0, 1)
+        
+        if entries[row][col].get() == '0': 
+            random_num = random.randint(1, 4)
+            entries[row][col].delete(0, tk.END)
+            entries[row][col].insert(0, str(random_num))
+            filled += 1
+
 def show_error(msg):
     messagebox.showerror("Erro", msg)
 
 if __name__ == "__main__":
-
     root = tk.Tk()
     root.title("Teste de Funções")
 
@@ -43,7 +55,9 @@ if __name__ == "__main__":
 
     reset_matrix(entries)
 
-    entries[0][0].insert(0, '5')
+    populate_random_cells(entries)
+
+    entries[0][0].insert(0, '4')
     validate_input(entries, 0, 0)
 
     root.mainloop()
