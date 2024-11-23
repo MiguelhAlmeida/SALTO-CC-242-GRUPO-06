@@ -1,70 +1,97 @@
 import tkinter as tk
-from tkinter import messagebox, Label
 
-# Função para definir os valores como 0 inicialmente
-def reset_matrix():
-    for i in range(2):
-        for j in range(2):
-            entries[i][j].delete(0, tk.END)  # Limpar o valor atual
-            entries[i][j].insert(0, '0')  # Definir como 0
+from tkinter import messagebox
+import random
 
-# Função que valida se o valor inserido é um número inteiro de 1 a 4
-def valida_entrada(event, row, col):
-    entry = entries[row][col]
-    value = entry.get()
+class SudokuApp:
+    def __init__(self, root):
+        print('Codigo na branch do Miguel')
+        self.root = root
+        self.root.title("Sudoku")
+        self.grid = [[0 for _ in range(9)] for _ in range(9)]
+        self.entries = [[None for _ in range(9)] for _ in range(9)]
+        
+        self.create_grid()
+        self.generate_sudoku()
+        self.fill_grid()
+        
+        btn_solve = tk.Button(root, text="Solve", command=self.solve_sudoku)
+        btn_solve.grid(row=10, column=0, columnspan=9)
+        
+    def create_grid(self):
+        for i in range(9):
+            for j in range(9):
+                entry = tk.Entry(self.root, width=5, font=('Arial', 18), justify='center')
+                entry.grid(row=i, column=j)
+                self.entries[i][j] = entry
 
-    if value == '': 
-        entry.insert(0, '0')
-    else:
-        try:
-            int_value = int(value)
-            if int_value < 1 or int_value > 4:  # Verifica o intervalo de 1 a 4
-                raise ValueError
-        except ValueError:
-            messagebox.showerror("Erro", "Por favor, insira um número inteiro entre 1 e 4.")
-            entry.delete(0, tk.END)
-            entry.insert(0, '0')
+    def generate_sudoku(self):
+        self.fill_grid()
+
+    def fill_grid(self):
+        for row in range(9):
+            for col in range(9):
+                if self.grid[row][col] == 0:
+                    num_list = random.sample(range(1, 10), 9)  # Números de 1 a 9
+                    for num in num_list:
+                        if self.is_valid(num, row, col):
+                            self.grid[row][col] = num
+                            if self.fill_grid():  # Chamada recursiva
+                                return True
+                            self.grid[row][col] = 0  # Backtrack
+                    return False  # Se nenhum número é válido
+        return True  # Preenchimento completo
+
+    def remove_numbers(self):
+        count = 40  # Numbers to remove
+        while count > 0:
+            i = random.randint(0, 8)
+            j = random.randint(0, 8)
+            if self.grid[i][j] != 0:
+                self.grid[i][j] = 0
+                count -= 1
+
+    def fill_grid(self):
+        for i in range(9):
+            for j in range(9):
+                if self.grid[i][j] != 0:
+                    self.entries[i][j].delete(0, tk.END)
+                    self.entries[i][j].insert(0, str(self.grid[i][j]))
+                    self.entries[i][j].config(state='readonly')
+
+    def is_valid(self, num, row, col):
+        for i in range(9):
+            if self.grid[row][i] == num or self.grid[i][col] == num:
+                return False
+        
+        start_row, start_col = 3 * (row // 3), 3 * (col // 3)
+        for i in range(3):
+            for j in range(3):
+                if self.grid[start_row + i][start_col + j] == num:
+                    return False
+        return True
+
+    def solve_sudoku(self):
+        if self.solve():
+            self.fill_grid()
         else:
-            if check_repetidos(row, col, value):  # Verifica repetição
-                entry.delete(0, tk.END)
-                entry.insert(0, '0')
+            messagebox.showinfo("Info", "No solution exists!")
 
-# Função para verificar se há valores repetidos na matriz
-def check_repetidos(current_row, current_col, current_value):
-    for i in range(2):
-        for j in range(2):
-            if (i != current_row or j != current_col) and entries[i][j].get() == current_value:
-                messagebox.showerror("Erro", f"O valor {current_value} já foi inserido.")
-                return True
-    return False
+    def solve(self):
+        for row in range(9):
+            for col in range(9):
+                if self.grid[row][col] == 0:
+                    for num in range(1, 10):
+                        if self.is_valid(num, row, col):
+                            self.grid[row][col] = num
+                            if self.solve():
+                                return True
+                            self.grid[row][col] = 0
+                    return False
+        return True
 
-# Criando a janela principal
-root = tk.Tk()
-root.title("Sudoku ")
-root.geometry("400x400")
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = SudokuApp(root)
+    root.mainloop()
 
-# Label centralizado
-label = Label(root, text="Insira os valores para completar o sudoku", justify='center')
-label.grid(row=0, column=0, columnspan=2, pady=10)  # Centraliza o label na janela
-
-# Criando uma matriz 2x2 de campos de entrada
-entries = [[None for _ in range(2)] for _ in range(2)]
-
-for i in range(2):
-    for j in range(2):
-        entry = tk.Entry(root, width=2, justify='center')  # Tamanho ajustado
-        entry.grid(row=i+1, column=j, padx=0, pady=0, ipadx=0, ipady=8, sticky='nsew')
-        entry.configure(highlightbackground="black", highlightthickness=1, relief="solid")
-        entry.insert(0, '0')
-        entry.bind("<FocusOut>", lambda event, row=i, col=j: valida_entrada(event, row, col))  # Validar após perder o foco
-        entries[i][j] = entry
-
-# Botão de reset
-reset_button = tk.Button(root, text="Resetar", command=reset_matrix)
-reset_button.grid(row=3, column=0, columnspan=2, pady=10)  #Centraliza o botão de reset
-
-# Iniciar com os valores zerados
-reset_matrix()
-
-# Executar a interface
-root.mainloop()
