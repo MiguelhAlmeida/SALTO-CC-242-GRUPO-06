@@ -41,6 +41,7 @@ def check_repetidos(current_row, current_col, current_value):
 # Criando a janela principal
 root = tk.Tk()
 root.title("Sudoku ")
+root.geometry("400x400")
 
 # Label centralizado
 label = Label(root, text="Insira os valores para completar o sudoku", justify='center')
@@ -51,8 +52,9 @@ entries = [[None for _ in range(2)] for _ in range(2)]
 
 for i in range(2):
     for j in range(2):
-        entry = tk.Entry(root, width=5, justify='center')  # Tamanho ajustado
-        entry.grid(row=i+1, column=j, padx=10, pady=10)
+        entry = tk.Entry(root, width=2, justify='center')  # Tamanho ajustado
+        entry.grid(row=i+1, column=j, padx=0, pady=0, ipadx=0, ipady=8, sticky='nsew')
+        entry.configure(highlightbackground="black", highlightthickness=1, relief="solid")
         entry.insert(0, '0')
         entry.bind("<FocusOut>", lambda event, row=i, col=j: valida_entrada(event, row, col))  # Validar após perder o foco
         entries[i][j] = entry
