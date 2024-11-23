@@ -7,7 +7,7 @@ class Interface:
         self.raiz.title("Sudoku")
         self.raiz.configure(background="#d0d0d0")
 
-        self.tamanho_sudoku = 4
+        self.tamanho_sudoku = 9
         self.entradas = []
         self.sudoku = []
         self.ja_resolvido = False
