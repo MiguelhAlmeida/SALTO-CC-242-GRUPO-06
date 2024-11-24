@@ -4,7 +4,7 @@ from tkinter import messagebox
 def criar_sudoku(self):
     raiz = 0
     try:
-        self.tamanho_sudoku = int(self.tamanho_sudoku)
+        self.tamanho_sudoku = int(self.tamanho_sudoku_var.get())
 
         raiz = int(self.tamanho_sudoku ** 0.5)
         if raiz ** 2 != self.tamanho_sudoku:

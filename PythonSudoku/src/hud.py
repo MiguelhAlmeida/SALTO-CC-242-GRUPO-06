@@ -17,16 +17,31 @@ class Interface:
 
         self.painel_grade = tk.Frame(raiz)
         self.painel_grade.pack(pady=10)
-        self.botao_resolver = tk.Button(painel_principal, text="Resolver Sudoku", command=lambda: functions.preencher_sudoku(self, self.sudoku, 0, resolver=True))
-        self.botao_resolver.grid(row=0, column=2, padx=5)
+
+        self.tamanho_label = tk.Label(painel_principal, background="#d4d4d4", text="Tamanho")
+        self.tamanho_label.grid(row=0, column=0, padx=5)
+
+        self.tamanho_sudoku_var = tk.StringVar(value=str(self.tamanho_sudoku))
+        self.tamanho_entrada = tk.Entry(painel_principal, textvariable=self.tamanho_sudoku_var, width=5)
+        self.tamanho_entrada.grid(row=0, column=1, padx=5)
+
+        self.botao_gerar = tk.Button(painel_principal, text="Gerar", command=lambda: self.criar_tabuleiro())
+        self.botao_gerar.grid(row=0, column=2, padx=5)
+
+        self.botao_resolver = tk.Button(painel_principal, text="Resolver", command=lambda: functions.preencher_sudoku(self, self.sudoku, 0, resolver=True))
+        self.botao_resolver.grid(row=0, column=3, padx=5)
 
         self.criar_tabuleiro()
     
     def criar_tabuleiro(self):
+        self.ja_resolvido = False
+        self.entradas = []
         self.sudoku = functions.criar_sudoku(self)
 
+        for componentes in self.painel_grade.winfo_children():
+            componentes.destroy()
+
         if len(self.sudoku) == 0:
-            self.raiz.destroy()
             return
         
         for linha in range(self.tamanho_sudoku):
